@@ -1,4 +1,4 @@
-package sg.edu.np.mad.madpractical3;
+package sg.edu.np.mad.madpractical4;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Random;
+
+import sg.edu.np.mad.madpractical3.R;
 
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
