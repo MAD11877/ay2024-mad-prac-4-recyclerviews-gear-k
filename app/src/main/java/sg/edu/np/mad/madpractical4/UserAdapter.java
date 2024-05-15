@@ -22,6 +22,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     private ArrayList<User> userList;
     private Context context;
 
+    // Constructor used in tests
+    public UserAdapter(ArrayList<User> userList) {
+        this.userList = userList;
+    }
+
+    // Constructor used in the actual app
     public UserAdapter(ArrayList<User> userList, Context context) {
         this.userList = userList;
         this.context = context;
@@ -61,7 +67,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
                         Intent intent = new Intent(v.getContext(), MainActivity.class);
                         intent.putExtra("RandomNumber", randomInt);
-                        v.getContext().startActivity(intent); // Use the view's context
+                        v.getContext().startActivity(intent);
                     })
                     .setNegativeButton("CLOSE", (dialog, which) -> dialog.dismiss())
                     .setCancelable(true);
