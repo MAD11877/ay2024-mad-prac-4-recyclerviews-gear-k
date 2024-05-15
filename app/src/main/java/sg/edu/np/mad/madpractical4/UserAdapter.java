@@ -1,10 +1,14 @@
 package sg.edu.np.mad.madpractical4;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +20,11 @@ import sg.edu.np.mad.madpractical3.R;
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
     private ArrayList<User> userList;
+    private Context context;
 
-    public UserAdapter(ArrayList<User> userList) {
+    public UserAdapter(ArrayList<User> userList, Context context) {
         this.userList = userList;
+        this.context = context;
     }
 
     @NonNull
@@ -55,7 +61,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
                         Intent intent = new Intent(v.getContext(), MainActivity.class);
                         intent.putExtra("RandomNumber", randomInt);
-                        v.getContext().startActivity(intent);
+                        v.getContext().startActivity(intent); // Use the view's context
                     })
                     .setNegativeButton("CLOSE", (dialog, which) -> dialog.dismiss())
                     .setCancelable(true);
