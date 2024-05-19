@@ -1,17 +1,11 @@
 package sg.edu.np.mad.madpractical4;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Random;
-
-import sg.edu.np.mad.madpractical3.R;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -24,53 +18,26 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        // Set up the ImageView with AlertDialog
-        ImageView imageView = findViewById(R.id.imageView);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create an AlertDialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
-                builder.setTitle("Profile")
-                        .setMessage("MADness")
-                        .setPositiveButton("VIEW", (dialog, which) -> {
-                            // Generate a random integer
-                            Random random = new Random();
-                            int randomInt = random.nextInt(100); // Generates a random integer from 0 to 99
-
-                            // Create an Intent to start MainActivity
-                            Intent intent = new Intent(ListActivity.this, MainActivity.class);
-                            intent.putExtra("RandomNumber", randomInt);
-                            startActivity(intent);
-                        })
-                        .setNegativeButton("CLOSE", (dialog, which) -> dialog.dismiss())
-                        .setCancelable(true);
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        // Create a list of 20 random users
-        userList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            userList.add(new User(generateRandomName(), generateRandomDescription(), i, new Random().nextBoolean()));
-        }
-
-        // Set up the RecyclerView
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        userAdapter = new UserAdapter(userList);
+
+        userList = generateRandomUsers(20);
+        userAdapter = new UserAdapter(userList, this);
         recyclerView.setAdapter(userAdapter);
     }
 
-    private String generateRandomName() {
+    private ArrayList<User> generateRandomUsers(int count) {
+        ArrayList<User> users = new ArrayList<>();
+        Random random = new Random();
         String[] names = {"John", "Jane", "Alex", "Chris", "Katie", "Laura", "Mike", "David", "Anna", "Tom"};
-        return names[new Random().nextInt(names.length)];
-    }
-
-    private String generateRandomDescription() {
         String[] descriptions = {"Lorem ipsum", "Dolor sit amet", "Consectetur adipiscing", "Elit", "Sed do eiusmod"};
-        return descriptions[new Random().nextInt(descriptions.length)];
+
+        for (int i = 0; i < count; i++) {
+            String name = names[random.nextInt(names.length)] + random.nextInt(1000); // Randomize names
+            String description = descriptions[random.nextInt(descriptions.length)];
+            boolean followed = random.nextBoolean();
+            users.add(new User(name, description, i, followed));
+        }
+        return users;
     }
 }

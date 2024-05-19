@@ -5,17 +5,11 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Random;
-
-import sg.edu.np.mad.madpractical3.R;
 
 public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
 
@@ -45,9 +39,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         User user = userList.get(position);
         holder.nameTextView.setText(user.name);
         holder.descriptionTextView.setText(user.description);
-        holder.smallImageView.setImageResource(R.drawable.ic_launcher_background);
-        holder.largeImageView.setImageResource(R.drawable.ic_launcher_background);
-        holder.followToggleButton.setChecked(user.followed);
+        holder.smallImageView.setImageResource(R.drawable.ic_launcher_foreground);
 
         if (user.name.endsWith("7")) {
             holder.additionalImageView.setVisibility(View.VISIBLE);
@@ -73,12 +65,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
                     .setCancelable(true);
             AlertDialog dialog = builder.create();
             dialog.show();
-        });
-
-        holder.followToggleButton.setOnClickListener(v -> {
-            // Toggle follow state
-            user.followed = holder.followToggleButton.isChecked();
-            Toast.makeText(v.getContext(), user.followed ? "Followed" : "Unfollowed", Toast.LENGTH_SHORT).show();
         });
     }
 

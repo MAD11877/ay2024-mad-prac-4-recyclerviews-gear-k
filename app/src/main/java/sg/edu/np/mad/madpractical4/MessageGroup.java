@@ -8,7 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import sg.edu.np.mad.madpractical3.R;
+import sg.edu.np.mad.madpractical4.R;
 
 public class MessageGroup extends AppCompatActivity {
 
